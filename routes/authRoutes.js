@@ -9,6 +9,27 @@ module.exports = (app) => {
     //callback route after authorization
     app.get('/auth/google/callback',
         passport.authenticate('google'))
+
+    //TODO: Add Facebook oAuth
+    app.get('/auth/facebook',
+        passport.authenticate('facebook'));
+
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/',
+            failureRedirect: '/login'
+        }));
+
+    // app.get('/auth/facebook/callback',
+    //     passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }))
+    // function (req, res) {
+    //     console.log('yay');
+    //     res.redirect('/')
+    // });
+
+
+    //TODO: Add a third 0Auth
+
     app.get('/api/logout', (req, res) => {
         req.logout();
         res.send(req.user);
